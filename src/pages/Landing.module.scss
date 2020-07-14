@@ -1,0 +1,28 @@
+@import "../App.scss";
+
+.jumbotron {
+  background-color: $light;
+  min-height: calc(100vh - 56px - 56px);
+  margin: 0
+}
+
+.jumbotronText {
+  color: $dark;
+}
+
+.jumbotronAction {
+  a {
+    margin: 5px
+  }
+}
+
+footer {
+  background-color: $primary;
+  height: 56px;
+  color: $light;
+  a {
+    color: $light;
+  }
+  text-align: center;
+  padding-top: 15px;
+}
