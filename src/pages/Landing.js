@@ -7,7 +7,7 @@ import module from './Landing.module.scss'
 export function Landing() {
   return (
     <>
-      <Navbar className={module.navbar} bg="light">
+      <Navbar bg="light">
         <Container>
           <Navbar.Brand href="/">
             <img
