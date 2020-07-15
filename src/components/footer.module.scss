@@ -1,0 +1,12 @@
+@import "../App.scss";
+
+.footer {
+  background-color: $primary;
+  min-height: 56px;
+  color: $light;
+  a {
+    color: $light;
+  }
+  text-align: center;
+  padding-top: 15px;
+}

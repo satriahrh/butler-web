@@ -1,0 +1,6 @@
+@import "../App.scss";
+
+.children {
+  min-height: calc(100vh - 56px - 56px);
+  background-color: $light;
+}
