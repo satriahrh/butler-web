@@ -1,10 +1,9 @@
 import React from "react";
-import {Button, Container, Form} from 'react-bootstrap'
 import {useForm} from "react-hook-form";
 import {useHistory} from "react-router-dom";
 
-import module from './Register.module.scss';
 import {PublicPage} from "../components/page";
+import {SimpleForm} from "../components/form";
 
 const forms = [
   {
@@ -30,31 +29,12 @@ export default function Login() {
 
   return (
     <PublicPage>
-      <Container className={module.formContainer}>
-        <Form
-          onSubmit={handleSubmit(onSubmit)}
-        >
-          {
-            forms.map((form) => {
-              return (
-                <Form.Group key={form.field} controlId={"form" + form.field}>
-                  <Form.Label>
-                    {form.label}
-                  </Form.Label>
-                  <Form.Control
-                    name={form.field}
-                    required
-                    type={form.type}
-                    placeholder={form.placeholder}
-                    ref={register}
-                  />
-                </Form.Group>
-              )
-            })
-          }
-          <Button type="submit">Login</Button>
-        </Form>
-      </Container>
+      <SimpleForm
+        fields={forms}
+        register={register}
+        onSubmit={handleSubmit(onSubmit)}
+        submitText='Login'
+      />
     </PublicPage>
   )
 }
