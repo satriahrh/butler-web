@@ -58,7 +58,7 @@ export default function Register() {
               )
             })
           }
-          <Button type="submit">Submit</Button>
+          <Button type="submit">Register</Button>
         </Form>
       </Container>
     </PublicPage>
