@@ -2,7 +2,7 @@ import React from "react";
 import {Container, Navbar, Nav} from 'react-bootstrap';
 
 import logo from "../assets/logo.png";
-import '../App.scss'
+import '../index.scss'
 
 export function PublicNavigation() {
   return (

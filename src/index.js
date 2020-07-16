@@ -1,12 +1,30 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
+import {BrowserRouter, Route} from 'react-router-dom'
+import {SecureRoute, Security, LoginCallback} from '@okta/okta-react';
+
 import * as serviceWorker from './serviceWorker';
+import './index.scss';
+import App from "./pages/App";
+import {Landing} from "./pages/public/Landing";
+import Register from "./pages/public/Register";
+import Login from "./pages/public/Login";
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <BrowserRouter>
+      <Security
+        issuer={`${process.env.REACT_APP_OKTA_ORG_URL}/oauth2/default`}
+        clientId={process.env.REACT_APP_OKTA_CLIENT_ID}
+        redirectUri={window.location.origin + '/implicit/callback'}
+      >
+        <Route exact path='/' component={Landing}/>
+        <Route exact path='/register' component={Register}/>
+        <Route exact path='/login' component={Login}/>
+        <Route exact path='/implicit/callback' component={LoginCallback}/>
+        <SecureRoute path='/app' component={App}/>
+      </Security>
+    </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')
 );

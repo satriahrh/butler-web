@@ -2,7 +2,7 @@ import React from "react";
 import {Button, Container, Jumbotron} from 'react-bootstrap'
 
 import module from './Landing.module.scss'
-import {PublicPage} from "../components/page";
+import {PublicPage} from "../../components/page";
 
 export function Landing() {
   return (

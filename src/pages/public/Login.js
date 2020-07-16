@@ -2,20 +2,14 @@ import React from "react";
 import {useForm} from "react-hook-form";
 import {useHistory} from "react-router-dom";
 
-import {PublicPage} from "../components/page";
-import {SimpleForm} from "../components/form";
+import {PublicPage} from "../../components/page";
+import {SimpleForm} from "../../components/form";
 
 const forms = [
   {
-    field: 'email',
-    label: 'Email',
-    type: 'email',
-    placeholder: 'iamuser@example.com'
-  },
-  {
-    field: 'username',
-    label: 'Username',
-    placeholder: 'iamuser'
+    field: 'identity',
+    label: 'Username or Email',
+    placeholder: 'iamuser or iamuser@example.com'
   },
   {
     field: 'password',
@@ -25,12 +19,12 @@ const forms = [
   },
 ];
 
-export default function Register() {
+export default function Login() {
   const history = useHistory();
   const {register, handleSubmit} = useForm();
   const onSubmit = data => {
     console.log(data); // TODO backend
-    history.push('/login');
+    history.push('/');
   };
 
   return (
@@ -39,7 +33,7 @@ export default function Register() {
         fields={forms}
         register={register}
         onSubmit={handleSubmit(onSubmit)}
-        submitText='Register'
+        submitText='Login'
       />
     </PublicPage>
   )
