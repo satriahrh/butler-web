@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {BrowserRouter, Route} from 'react-router-dom'
+import {BrowserRouter, Route, useHistory} from 'react-router-dom'
 import {SecureRoute, Security, LoginCallback} from '@okta/okta-react';
 
 import * as serviceWorker from './serviceWorker';
@@ -17,6 +17,12 @@ ReactDOM.render(
         issuer={`${process.env.REACT_APP_OKTA_ORG_URL}/oauth2/default`}
         clientId={process.env.REACT_APP_OKTA_CLIENT_ID}
         redirectUri={window.location.origin + '/implicit/callback'}
+        onAuthRequired={(authService) => {
+          const redirectUri = authService.getFromUri();
+          const redirectUriEncoded = encodeURI(redirectUri)
+          const history = useHistory();
+          history.push(`/login?redirect=${redirectUriEncoded}`);
+        }}
       >
         <Route exact path='/' component={Landing}/>
         <Route exact path='/register' component={Register}/>
