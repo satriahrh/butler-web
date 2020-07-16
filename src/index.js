@@ -17,6 +17,12 @@ ReactDOM.render(
         issuer={`${process.env.REACT_APP_OKTA_ORG_URL}/oauth2/default`}
         clientId={process.env.REACT_APP_OKTA_CLIENT_ID}
         redirectUri={window.location.origin + '/implicit/callback'}
+        tokenManager={{
+          autoRenew: true,
+          secure: true,
+          storage: 'localStorage',
+          expireEarlySeconds: 30
+        }}
         onAuthRequired={(authService) => {
           const redirectUri = authService.getFromUri();
           const redirectUriEncoded = encodeURI(redirectUri)

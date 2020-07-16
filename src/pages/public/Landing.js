@@ -1,10 +1,23 @@
 import React from "react";
 import {Button, Container, Jumbotron} from 'react-bootstrap'
+import {useOktaAuth} from '@okta/okta-react'
+import {useHistory} from 'react-router-dom'
 
 import module from './Landing.module.scss'
 import {PublicPage} from "../../components/page";
+import Loading from "./Loading";
 
 export function Landing() {
+  const history = useHistory();
+  const {authState} = useOktaAuth();
+
+  if (authState.isAuthenticated) {
+    history.push('/app')
+  }
+  if (authState.isPending) {
+    return <Loading/>
+  }
+
   return (
     <PublicPage>
       <Jumbotron className={module.jumbotron}>
