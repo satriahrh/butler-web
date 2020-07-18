@@ -4,7 +4,7 @@ import {useHistory} from "react-router-dom";
 import OktaAuth from '@okta/okta-auth-js';
 import {useOktaAuth} from '@okta/okta-react'
 
-import {PublicPage} from "../../components/page";
+import Public from "./Public";
 import {SimpleForm} from "../../components/form";
 import Loading from "./Loading";
 
@@ -12,30 +12,23 @@ const forms = [
   {
     field: 'username',
     label: 'Username',
-    placeholder: 'iamuser'
+    placeholder: 'iamuser',
+    autoComplete: 'username',
   },
   {
     field: 'password',
     label: 'Password',
     type: 'password',
-    placeholder: 'S0meS7rong!!P455word'
+    placeholder: 'S0meS7rong!!P455word',
+    autoComplete: 'current-password',
   },
 ];
 
 export default function Login() {
-  const history = useHistory();
-  const {register, handleSubmit, setError} = useForm();
-  const {authState, authService} = useOktaAuth();
-
-  if (authState.isAuthenticated) {
-    history.push('/app');
-  }
-  if (authState.isPending) {
-    return <Loading/>
-  }
+  const {register, handleSubmit, setError, errors} = useForm();
+  const {authService} = useOktaAuth();
 
   const onSubmit = data => {
-    console.log(data); // TODO backend
     OktaAuth({
       issuer: `${process.env.REACT_APP_OKTA_ORG_URL}/oauth2/default`,
     }).signIn({
@@ -46,19 +39,20 @@ export default function Login() {
     }).catch(err => {
       setError("okta", {
         type: "manual",
-        message: err,
+        message: err.message,
       })
     });
   };
 
   return (
-    <PublicPage>
+    <Public>
       <SimpleForm
+        errors={errors}
         fields={forms}
         register={register}
         onSubmit={handleSubmit(onSubmit)}
         submitText='Login'
       />
-    </PublicPage>
+    </Public>
   )
 }

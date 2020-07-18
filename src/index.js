@@ -24,10 +24,10 @@ ReactDOM.render(
           expireEarlySeconds: 30
         }}
         onAuthRequired={(authService) => {
-          const redirectUri = authService.getFromUri();
-          const redirectUriEncoded = encodeURI(redirectUri)
+          // const redirectUri = authService.getFromUri();
+          // const redirectUriEncoded = encodeURI(redirectUri);
           const history = useHistory();
-          history.push(`/login?redirect=${redirectUriEncoded}`);
+          history.push(`/login`);
         }}
       >
         <Route exact path='/' component={Landing}/>
