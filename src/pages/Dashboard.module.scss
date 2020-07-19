@@ -1,0 +1,16 @@
+@import "../index";
+
+.card {
+  color: $light;
+  text-shadow: -1px -1px 1px rgba(255,255,255,.1), 1px 1px 1px rgba(0,0,0,.5);
+  &:hover {
+    text-decoration: none !important;
+    color: $dark;
+    text-shadow: none;
+    background-color: $light !important;
+  }
+  &:focus {
+    color: $light;
+    background-color: $dark !important;
+  }
+}
