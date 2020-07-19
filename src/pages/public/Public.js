@@ -1,7 +1,7 @@
 import React from "react";
 import Page from "../Page";
 import Loading from "./Loading";
-import {useOktaAuth} from "@okta/okta-react/src";
+import {useOktaAuth} from "@okta/okta-react";
 import {useHistory} from 'react-router-dom';
 
 export default function Public({children}) {
