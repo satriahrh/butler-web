@@ -1,9 +1,11 @@
 import React from "react";
 import {useForm} from "react-hook-form";
 import {useHistory} from "react-router-dom";
+import {useOktaAuth} from "@okta/okta-react";
 
 import {SimpleForm} from "../../components/form";
-import Public from "./Public";
+import Loading from "./Loading";
+import Page from "../Page";
 
 const forms = [
   {
@@ -28,6 +30,14 @@ const forms = [
 export default function Register() {
   const history = useHistory();
   const {register, handleSubmit} = useForm();
+  const {authState} = useOktaAuth();
+
+  if (authState.isAuthenticated) {
+    history.push('/app');
+  }
+  if (authState.isPending) {
+    return <Loading/>
+  }
 
   const onSubmit = data => {
     console.log(data); // TODO backend
@@ -35,13 +45,13 @@ export default function Register() {
   };
 
   return (
-    <Public>
+    <Page>
       <SimpleForm
         fields={forms}
         register={register}
         onSubmit={handleSubmit(onSubmit)}
         submitText='Register'
       />
-    </Public>
+    </Page>
   )
 }

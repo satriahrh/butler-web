@@ -4,9 +4,9 @@ import {useHistory} from "react-router-dom";
 import OktaAuth from '@okta/okta-auth-js';
 import {useOktaAuth} from '@okta/okta-react'
 
-import Public from "./Public";
 import {SimpleForm} from "../../components/form";
 import Loading from "./Loading";
+import Page from "../Page";
 
 const forms = [
   {
@@ -26,7 +26,15 @@ const forms = [
 
 export default function Login() {
   const {register, handleSubmit, setError, errors} = useForm();
-  const {authService} = useOktaAuth();
+  const {authState, authService} = useOktaAuth();
+  const history = useHistory();
+
+  if (authState.isAuthenticated) {
+    history.push('/app');
+  }
+  if (authState.isPending) {
+    return <Loading/>
+  }
 
   const onSubmit = data => {
     OktaAuth({
@@ -45,7 +53,7 @@ export default function Login() {
   };
 
   return (
-    <Public>
+    <Page>
       <SimpleForm
         errors={errors}
         fields={forms}
@@ -53,6 +61,6 @@ export default function Login() {
         onSubmit={handleSubmit(onSubmit)}
         submitText='Login'
       />
-    </Public>
+    </Page>
   )
 }
