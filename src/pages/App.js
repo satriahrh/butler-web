@@ -5,6 +5,7 @@ import {HashRouter, Switch, Route} from "react-router-dom";
 
 import Page from "./Page";
 import Dashboard from "./Dashboard";
+import CreateBoard from "./CreateBoard";
 
 export default function App() {
   const [user, setUser] = useState();
@@ -37,9 +38,8 @@ export default function App() {
         {errorAlert}
         <HashRouter>
           <Switch>
-            <Route path='/' exact>
-              <Dashboard/>
-            </Route>
+            <Route path='/' exact component={Dashboard}/>
+            <Route path='/boards/create' exact component={CreateBoard}/>
           </Switch>
         </HashRouter>
       </Container>

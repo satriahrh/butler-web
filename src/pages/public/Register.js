@@ -1,5 +1,4 @@
 import React from "react";
-import {useForm} from "react-hook-form";
 import {useHistory} from "react-router-dom";
 import {useOktaAuth} from "@okta/okta-react";
 
@@ -29,7 +28,6 @@ const forms = [
 
 export default function Register() {
   const history = useHistory();
-  const {register, handleSubmit} = useForm();
   const {authState} = useOktaAuth();
 
   if (authState.isAuthenticated) {
@@ -48,8 +46,7 @@ export default function Register() {
     <Page>
       <SimpleForm
         fields={forms}
-        register={register}
-        onSubmit={handleSubmit(onSubmit)}
+        onSubmit={onSubmit}
         submitText='Register'
       />
     </Page>

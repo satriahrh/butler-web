@@ -25,7 +25,7 @@ const forms = [
 ];
 
 export default function Login() {
-  const {register, handleSubmit, setError, errors} = useForm();
+  const { setError, errors, clearErrors} = useForm();
   const {authState, authService} = useOktaAuth();
   const history = useHistory();
 
@@ -37,6 +37,7 @@ export default function Login() {
   }
 
   const onSubmit = data => {
+    clearErrors();
     OktaAuth({
       issuer: `${process.env.REACT_APP_OKTA_ORG_URL}/oauth2/default`,
     }).signIn({
@@ -57,8 +58,7 @@ export default function Login() {
       <SimpleForm
         errors={errors}
         fields={forms}
-        register={register}
-        onSubmit={handleSubmit(onSubmit)}
+        onSubmit={onSubmit}
         submitText='Login'
       />
     </Page>
