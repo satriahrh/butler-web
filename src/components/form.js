@@ -1,13 +1,16 @@
 import React from "react";
-import module from './form.module.scss';
 import {Button, Container, Form, Alert} from "react-bootstrap";
+import {useForm} from "react-hook-form";
+
+import module from './form.module.scss';
 
 export function SimpleForm(props) {
-  const {errors, fields, onSubmit, register, submitText} = props;
+  const {handleSubmit, register} = useForm();
+  const {errors, fields, onSubmit, submitText} = props;
   return (
     <Container className={module.simpleFormContainer}>
       <Form
-        onSubmit={onSubmit}
+        onSubmit={handleSubmit(onSubmit)}
       >
         {errors && Object.keys(errors).map((key, index) => {
           return (
@@ -17,7 +20,7 @@ export function SimpleForm(props) {
           )
         })}
         {
-          fields.map((field) => {
+          fields.map(field => {
             return (
               <Form.Group key={field.field} controlId={"form" + field.field}>
                 <Form.Label>
@@ -30,7 +33,12 @@ export function SimpleForm(props) {
                   placeholder={field.placeholder}
                   ref={register}
                   autoComplete={field.autoComplete}
-                />
+                  { ...( field.selection && { as: "select" } ) }
+                >
+                  {field.selection && field.selection.map(item => (
+                    <option key={item}>{item}</option>
+                  ))}
+                </Form.Control>
               </Form.Group>
             )
           })

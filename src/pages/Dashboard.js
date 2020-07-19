@@ -1,8 +1,7 @@
 import React, {useEffect, useState} from "react";
-import {Card, CardColumns, Container, Navbar, Tooltip, OverlayTrigger, Alert, Dropdown} from "react-bootstrap";
+import {Card, CardColumns, Navbar, Dropdown} from "react-bootstrap";
 
 import module from './Dashboard.module.scss'
-import {useOktaAuth} from "@okta/okta-react";
 import {CustomToggle} from "../components/navigation";
 
 
@@ -29,7 +28,7 @@ const Menu = () => (
     </Dropdown.Toggle>
 
     <Dropdown.Menu>
-      <Dropdown.Item href='#'>
+      <Dropdown.Item href='/app#boards/create'>
         <i className="far fa-plus-square"/> Create New Board</Dropdown.Item>
     </Dropdown.Menu>
   </Dropdown>
