@@ -1,22 +1,9 @@
 import React, {useEffect, useState} from "react";
-import {Card, CardColumns, Container, Navbar, Tooltip, OverlayTrigger, Alert} from "react-bootstrap";
+import {Card, CardColumns, Container, Navbar, Tooltip, OverlayTrigger, Alert, Dropdown} from "react-bootstrap";
 
 import module from './Dashboard.module.scss'
 import {useOktaAuth} from "@okta/okta-react";
-
-const CreateNewBoard = () => (
-  <OverlayTrigger
-    placement="bottom"
-    delay={{show: 250, hide: 400}}
-    overlay={(props) => (
-      <Tooltip{...props}>
-        Create New Board
-      </Tooltip>
-    )}
-  >
-    <a href='#'><i className="far fa-plus-square"/> Create New</a>
-  </OverlayTrigger>
-);
+import {CustomToggle} from "../components/navigation";
 
 
 const Boards = ({boards}) => (
@@ -35,41 +22,37 @@ const Boards = ({boards}) => (
   </CardColumns>
 );
 
+const Menu = () => (
+  <Dropdown alignRight>
+    <Dropdown.Toggle as={CustomToggle}>
+      <i className="fas fa-ellipsis-v" /> Settings
+    </Dropdown.Toggle>
+
+    <Dropdown.Menu>
+      <Dropdown.Item href='#'>
+        <i className="far fa-plus-square"/> Create New Board</Dropdown.Item>
+    </Dropdown.Menu>
+  </Dropdown>
+);
+
 export default function Dashboard() {
   const [boards, setBoards] = useState([]);
-  const [user, setUser] = useState();
-  const [error, setError] = useState();
-  const {authService} = useOktaAuth();
-  useEffect(() => {
-    authService.getUser(
-    ).then(
-      res => {
-        setUser(res);
-      }
-    ).catch(
-      err => {
-        setError(err.message)
-      }
-    );
-  }, [setUser, authService]);
+
 
   useEffect(() => {
     setBoards(sampleBoards);
   }, [setBoards]);
 
-  const errorAlert = error && <Alert variant='danger'>error</Alert>;
-
   return (
     <>
-      {errorAlert}
-      <h2>Hello, {user && user.given_name}</h2>
       <Navbar>
         <Navbar.Brand><h3>Boards</h3></Navbar.Brand>
         <Navbar.Toggle/>
         <Navbar.Collapse className="justify-content-end">
-          <Navbar.Text>
-            <CreateNewBoard/>
-          </Navbar.Text>
+          <Menu />
+          {/*<Navbar.Text>*/}
+          {/*  <CreateNewBoard/>*/}
+          {/*</Navbar.Text>*/}
         </Navbar.Collapse>
       </Navbar>
       <Boards boards={boards}/>
