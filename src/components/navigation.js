@@ -1,20 +1,46 @@
 import React from "react";
-import {Container, Navbar, Nav} from 'react-bootstrap';
+import {Button, Container, Dropdown, Navbar, Nav} from 'react-bootstrap';
 
+import module from './navigation.module.scss'
 import logo from "../assets/logo.png";
 import '../index.scss'
 
+export const CustomToggle = React.forwardRef(({children, onClick}, ref) => (
+  <Button
+    className={module.customToggle}
+    ref={ref}
+    onClick={(e) => {
+      e.preventDefault();
+      onClick(e);
+    }}
+    variant='link'
+  >
+    {children}
+  </Button>
+));
+
 export function Navigation({appContexts}) {
-  let navs = [];
+  let navs;
   if (appContexts) {
-    navs = [
-      <Nav.Item key={0}><Nav.Link onClick={appContexts.logoutCallback}>Logout</Nav.Link></Nav.Item>
-    ]
+    navs = (
+      <Dropdown alignRight>
+        <Dropdown.Toggle as={CustomToggle}>
+          {`Hi, ${appContexts.user && appContexts.user.given_name} `}<i className="far fa-user-circle"/>
+        </Dropdown.Toggle>
+
+        <Dropdown.Menu>
+          <Dropdown.Item onClick={appContexts.logoutCallback}><i
+            className="fas fa-sign-out-alt"/> Logout</Dropdown.Item>
+        </Dropdown.Menu>
+      </Dropdown>
+    )
   } else {
-    navs = [
-      <Nav.Item key={0}><Nav.Link href="/register">Register</Nav.Link></Nav.Item>,
-      <Nav.Item key={1}><Nav.Link href="/login">Log In</Nav.Link></Nav.Item>
-    ]
+    navs = (
+      <Nav>
+        <Nav.Item key={0}><Nav.Link href="/register">Register</Nav.Link></Nav.Item>,
+        <Nav.Item key={1}><Nav.Link href="/login">Log In</Nav.Link></Nav.Item>
+      </Nav>
+    )
   }
 
   return (
@@ -28,7 +54,7 @@ export function Navigation({appContexts}) {
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav"/>
         <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">
-          <Nav>{navs}</Nav>
+          {navs}
         </Navbar.Collapse>
       </Container>
     </Navbar>
