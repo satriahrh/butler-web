@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React from "react";
 import {useOktaAuth} from '@okta/okta-react'
 import {Container} from "react-bootstrap";
 import {HashRouter, Switch, Route} from "react-router-dom";

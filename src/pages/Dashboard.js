@@ -6,7 +6,7 @@ import {useOktaAuth} from "@okta/okta-react";
 
 const CreateNewBoard = () => (
   <OverlayTrigger
-    placement="right"
+    placement="bottom"
     delay={{show: 250, hide: 400}}
     overlay={(props) => (
       <Tooltip{...props}>
