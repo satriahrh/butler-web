@@ -11,10 +11,10 @@ const forms = [
     field: 'template',
     label: 'Choose Template',
     selection: [
-      'General Kanban Board',
-      'Virtual Desk',
-      'Reading List',
-      'Blogging Idea',
+      {value: 'kanban', display: 'General Kanban Board'},
+      {value: 'virtual-desk', display: 'Virtual Desk'},
+      {value: 'reading-list', display: 'Reading List'},
+      {value: 'blogging-idea', display: 'Blogging Idea'},
     ]
   },
 ];

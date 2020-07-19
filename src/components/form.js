@@ -36,7 +36,7 @@ export function SimpleForm(props) {
                   { ...( field.selection && { as: "select" } ) }
                 >
                   {field.selection && field.selection.map(item => (
-                    <option key={item}>{item}</option>
+                    <option key={item.value} value={item.value}>{item.display}</option>
                   ))}
                 </Form.Control>
               </Form.Group>
