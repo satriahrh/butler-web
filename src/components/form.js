@@ -1,14 +1,21 @@
 import React from "react";
 import module from './form.module.scss';
-import {Button, Container, Form} from "react-bootstrap";
+import {Button, Container, Form, Alert} from "react-bootstrap";
 
 export function SimpleForm(props) {
-  const {fields, onSubmit, register, submitText} = props;
+  const {errors, fields, onSubmit, register, submitText} = props;
   return (
     <Container className={module.simpleFormContainer}>
       <Form
         onSubmit={onSubmit}
       >
+        {errors && Object.keys(errors).map((key, index) => {
+          return (
+            <Alert key={index} variant='danger'>
+              {errors[key].message}
+            </Alert>
+          )
+        })}
         {
           fields.map((field) => {
             return (
@@ -22,6 +29,7 @@ export function SimpleForm(props) {
                   type={field.type}
                   placeholder={field.placeholder}
                   ref={register}
+                  autoComplete={field.autoComplete}
                 />
               </Form.Group>
             )
