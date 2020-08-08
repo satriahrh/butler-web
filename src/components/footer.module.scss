@@ -2,11 +2,11 @@
 
 .footer {
   background-color: $primary;
-  min-height: 56px;
+  height: 23px;
+  line-height: 23px;
   color: $light;
   a {
     color: $light;
   }
   text-align: center;
-  padding-top: 15px;
 }

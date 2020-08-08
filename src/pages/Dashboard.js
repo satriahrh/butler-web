@@ -13,7 +13,7 @@ const Boards = ({boards}) => (
             style={{backgroundColor: board.background}}
             className={module.card}
             key={board.id}
-            href='#'
+            href='/app/#boards/1'
       >
         {board.name}
       </Card>
@@ -24,7 +24,7 @@ const Boards = ({boards}) => (
 const Menu = () => (
   <Dropdown alignRight>
     <Dropdown.Toggle as={CustomToggle}>
-      <i className="fas fa-ellipsis-v" /> Settings
+      <i className="fas fa-ellipsis-v"/> Settings
     </Dropdown.Toggle>
 
     <Dropdown.Menu>
@@ -48,10 +48,7 @@ export default function Dashboard() {
         <Navbar.Brand><h3>Boards</h3></Navbar.Brand>
         <Navbar.Toggle/>
         <Navbar.Collapse className="justify-content-end">
-          <Menu />
-          {/*<Navbar.Text>*/}
-          {/*  <CreateNewBoard/>*/}
-          {/*</Navbar.Text>*/}
+          <Menu/>
         </Navbar.Collapse>
       </Navbar>
       <Boards boards={boards}/>

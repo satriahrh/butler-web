@@ -1,0 +1,36 @@
+.boardList {
+  display: flex;
+  margin-right: -15px;
+  margin-left: -15px;
+  height: calc(100vh - 79px - 56px);
+  overflow-y: scroll;
+  padding-right: 15px;
+  padding-left: 15px;
+}
+
+.list {
+  background-color: darkgrey;
+  float: left;
+  min-width: 270px;
+  max-width: 270px;
+  padding: 10px;
+  margin-left: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+}
+
+.listName {
+  height: 50px;
+  line-height: 50px;
+  font-size: 1.3em;
+}
+
+.listContent {
+  position: relative;
+  overflow: scroll;
+  height: calc(100vh - 79px - 56px - 70px - 10px);
+}
+
+.listCard {
+  margin-bottom: 7px;
+}
